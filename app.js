@@ -11,7 +11,7 @@ const authRoute = require('./routes/auth');
 
 //connect to DB
 mongoose.connect(
-    process.env.DB_CONNECTION_STRING, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
+    'mongodb+srv://admin:admin1996@cluster0.9t4ho.mongodb.net/cantimadb?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true }, () => {
         console.log('connected to the datbase');
 
     }
