@@ -52,6 +52,7 @@ router.post('/login', async (req, res) => {
     //LETS VALIDATE DATA BEFORE login 
 
     const error = loginValidation(req.body)
+    console.log(error);
 
     if (error.error != null) {
         return res.status(400).send(error.error.details[0].message);
