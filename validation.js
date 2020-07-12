@@ -8,7 +8,10 @@ const registerValidation = (requestBody) => {
     const schema = Joi.object({
         username: Joi.string().min(6).required(),
         email: Joi.string().min(6).required().email(),
+        fullName: Joi.string().min(6).required(),
         password: Joi.string().min(6).required(),
+        phoneNumber: Joi.string().length(10).required(),
+        nic: Joi.string().required().min(10).max(12)
 
     });
 

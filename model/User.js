@@ -11,6 +11,26 @@ const userSchema = new mongoose.Schema({
         min: 6
 
     },
+    fullName: {
+        type: String,
+        required: true,
+        min: 6
+
+    },
+    phoneNumber: {
+        type: String,
+        required: true,
+        min: 10
+
+    },
+    nic: {
+        type: String,
+        required: true,
+        min: 10,
+        max: 12
+
+    },
+
     password: {
         type: String,
         required: true,

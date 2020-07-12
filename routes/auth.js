@@ -2,7 +2,7 @@ const router = require('express').Router();
 const User = require('../model/User');
 const { loginValidation, registerValidation } = require("../validation")
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 
 //REGISTER
 router.post('/register', async (req, res) => {
@@ -22,7 +22,7 @@ router.post('/register', async (req, res) => {
     });
 
     if (emailExist) {
-        return res.status(400).send("Email is already in use");
+        return res.status(400).json({ "message": "Email is already in use" });
     }
 
     //HASH THE PASSWORD
@@ -33,15 +33,20 @@ router.post('/register', async (req, res) => {
     const user = new User({
         username: req.body.username,
         email: req.body.email,
-        password: hashPassword
+        password: hashPassword,
+        fullName: req.body.fullName,
+        nic: req.body.nic,
+        phoneNumber: req.body.phoneNumber
     })
 
     try {
         const savedUser = await user.save();
-        res.send({
-            "user": user.id
+        res.json({
+            "user": user.id,
+            "message": "New account created successfully"
         });
     } catch (error) {
+        console.log(error);
         res.status(400).send(error);
 
     }
