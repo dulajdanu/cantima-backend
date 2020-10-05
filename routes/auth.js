@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 router.post('/register', async (req, res) => {
 
     //LETS VALIDATE DATA BEFORE WE MAKE A USER
-
+    console.log("Received");
     const error = registerValidation(req.body)
 
     if (error.error != null) {
@@ -55,7 +55,7 @@ router.post('/register', async (req, res) => {
 //LOGIN
 router.post('/login', async (req, res) => {
     //LETS VALIDATE DATA BEFORE login 
-
+    console.log("Res");
     const error = loginValidation(req.body)
     console.log(error);
 

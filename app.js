@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const bodyparser = require('body-parser')
 const env = require('dotenv/config')
 env.config
 
@@ -19,7 +20,8 @@ mongoose.connect(
 
 
 //Middlewares
-app.use(express.json());
+app.use(bodyparser.urlencoded({ extended: false }));
+app.use(bodyparser.json());
 
 
 //routes middelwares
@@ -27,6 +29,6 @@ app.use('/api/user', authRoute);
 
 
 
-app.listen(3000, process.env.OPENSHIFT_NODEJS_IP || process.env.IP || '127.0.0.1', () => {
+app.listen(8080, function(){
     console.log("server is runing");
 })
