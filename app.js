@@ -25,7 +25,7 @@ app.use(bodyparser.json());
 
 
 //routes middelwares
-app.use('/api/user', authRoutee);// every time the user goes to /api/user/ use the auth route
+app.use('/api/user', authRoute);// every time the user goes to /api/user/ use the auth route
 
 
 app.use('/api/data', getUniversityRoute)
