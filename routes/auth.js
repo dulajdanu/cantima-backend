@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 //REGISTER
 router.post('/register', async (req, res) => {
 
+
     //LETS VALIDATE DATA BEFORE WE MAKE A USER
     console.log("Received");
     const error = registerValidation(req.body)
@@ -36,12 +37,14 @@ router.post('/register', async (req, res) => {
         password: hashPassword,
         fullName: req.body.fullName,
         nic: req.body.nic,
-        phoneNumber: req.body.phoneNumber
+        phoneNumber: req.body.phoneNumber,
+        university: req.body.university,
+        faculty: req.body.faculty
     })
 
     try {
         const savedUser = await user.save();
-        res.json({
+        res.status(200).json({
             "user": user.id,
             "message": "New account created successfully"
         });

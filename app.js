@@ -25,10 +25,10 @@ app.use(bodyparser.json());
 
 
 //routes middelwares
-app.use('/api/user', authRoute);
+app.use('/api/user', authRoute);// every time the user goes to /api/user/ use the auth route
 
 
 
-app.listen(8080, function(){
+app.listen(8080, function () {
     console.log("server is runing");
 })
