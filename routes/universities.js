@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const University = require('../model/University');
-const { route } = require('./auth');
 
 
 //get all universities
@@ -14,3 +13,5 @@ router.get('/universities', async (req, res) => {
     }
 
 })
+
+module.exports = router;
