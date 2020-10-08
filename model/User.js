@@ -36,16 +36,7 @@ const userSchema = new mongoose.Schema({
         required: true,
         min: 6
     },
-    university: {
-        type: String,
-        required: true,
-        min: 6
-    },
-    faculty: {
-        type: String,
-        required: true,
-        min: 6
-    }
+
 });
 
 module.exports = mongoose.model('User', userSchema)

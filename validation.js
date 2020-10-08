@@ -12,8 +12,6 @@ const registerValidation = (requestBody) => {
         password: Joi.string().min(6).required(),
         phoneNumber: Joi.string().length(10).required(),
         nic: Joi.string().required().min(10).max(12),
-        university: Joi.string().required().min(5).max(40),
-        faculty: Joi.string().required().min(4).max(40),
 
 
     });

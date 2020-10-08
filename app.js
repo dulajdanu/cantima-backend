@@ -8,7 +8,6 @@ env.config
 //import routes
 const authRoute = require('./routes/auth');
 
-const getUniversityRoute = require('./routes/universities');
 
 //connect to DB 
 mongoose.connect(
@@ -28,7 +27,6 @@ app.use(bodyparser.json());
 app.use('/api/user', authRoute);// every time the user goes to /api/user/ use the auth route
 
 
-app.use('/api/data', getUniversityRoute)
 
 
 

@@ -9,7 +9,7 @@ router.post('/register', async (req, res) => {
 
 
     //LETS VALIDATE DATA BEFORE WE MAKE A USER
-    console.log("Received");
+    console.log("Register page");
     const error = registerValidation(req.body)
 
     if (error.error != null) {
@@ -38,8 +38,6 @@ router.post('/register', async (req, res) => {
         fullName: req.body.fullName,
         nic: req.body.nic,
         phoneNumber: req.body.phoneNumber,
-        university: req.body.university,
-        faculty: req.body.faculty
     })
 
     try {
