@@ -30,7 +30,7 @@ app.use(bodyparser.json());
 app.use('/api/user', authRoute);// every time the user goes to /api/user/ use the auth route
 
 
-app.use('api/item', itemRoute); //every time the user goes to the api/item use this itemRoute
+app.use('/api/item', itemRoute); //every time the user goes to the api/item use this itemRoute
 
 
 
