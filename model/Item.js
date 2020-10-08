@@ -6,10 +6,10 @@ const itemSchema = new mongoose.Schema({
         required: true,
 
     },
-    quantity: { //the quantity of the food item
-        type: Number,
-        required: true,
-    },
+    // quantity: { //the quantity of the food item
+    //     type: Number,
+    //     required: true,
+    // },
     price: { //the price of the food item
         type: Number,
         required: true,
@@ -26,10 +26,11 @@ const itemSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    canteen_id: { //the id of the canteen where the item belongs
-        type: String,
+    category: { //category of the item
+        type: Number,
         required: true,
     },
+
 
 
 
