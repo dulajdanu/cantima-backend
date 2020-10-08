@@ -103,6 +103,53 @@ router.delete('/:itemID', async (req, res) => {
     }
 });
 
+//get All items from the db
+
+
+
+//update a item in the db
+router.patch('/:itemID', async (req, res) => {
+    //in the update method we have to pass everyfield in the request body otherwise validation error will occur
+    try {
+
+        const error = itemValidation(req.body)
+
+        if (error.error != null) {
+            return res.status(400).send(error.error.details[0].message);
+        }
+        const updatedItem = await Item.updateOne({
+            'id': req.params.itemID,
+        }, {
+            $set: {
+                name: req.body.name,
+                price: req.body.price,
+                category: req.body.category,
+                image: req.body.image,
+
+            }
+        });
+
+        if (updatedItem["nModified"] != 0) {
+            return res.json({ "message": "Item updated successfully" }).status(200);
+
+
+        } else {
+            return res.json({ "message": "Item not found " }).status(200);
+
+
+
+        }
+
+
+    } catch (error) {
+
+        return res.json({
+            "message": error
+        }).status(400);
+
+    }
+});
+
 
 
 module.exports = router;
