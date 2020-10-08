@@ -77,5 +77,32 @@ router.get('/:itemID', async (req, res) => {
 });
 
 
+//delete item from the database
+router.delete('/:itemID', async (req, res) => {
+    try {
+        const removedItem = await Item.deleteOne({
+            'id': req.params.itemID,
+        });
+        console.log(removedItem);
+        if (removedItem.deletedCount != 0) {
+
+            return res.json({ "message": "Item removed" }).status(200);
+
+        }
+        else {
+            return res.json({
+                "message": "Item not found"
+            }).status(400);
+        }
+    } catch (error) {
+
+        return res.json({
+            "message": error
+        }).status(400);
+
+    }
+});
+
+
 
 module.exports = router;
