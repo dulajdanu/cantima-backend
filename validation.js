@@ -12,6 +12,7 @@ const registerValidation = (requestBody) => {
         password: Joi.string().min(6).required(),
         phoneNumber: Joi.string().length(10).required(),
         nic: Joi.string().required().min(10).max(12),
+        credits: Joi.number().required().min(0),
 
 
     });

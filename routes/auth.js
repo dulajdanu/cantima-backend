@@ -38,6 +38,7 @@ router.post('/register', async (req, res) => {
         fullName: req.body.fullName,
         nic: req.body.nic,
         phoneNumber: req.body.phoneNumber,
+        credits: req.body.credits,
     })
 
     try {
