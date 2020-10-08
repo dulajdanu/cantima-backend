@@ -104,6 +104,20 @@ router.delete('/:itemID', async (req, res) => {
 });
 
 //get All items from the db
+router.get('/', async (req, res) => {
+    console.log("get all items");
+    try {
+        const allItems = await Item.find();
+
+        return res.json({ "items": allItems }).status(200);
+
+
+    } catch (error) {
+        console.log(error);
+        res.json({ "message": error }).status(400);
+
+    }
+});
 
 
 
