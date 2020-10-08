@@ -20,9 +20,10 @@ router.post('/add', async (req, res) => {
         'id': req.body.id,
     });
 
-    if (emailExist) {
+    if (itemExist) {
         return res.status(400).json({ "message": "Item already exist" });
     }
+    console.log("item doesnt exist in the db");
 
 
     //create a new Item
