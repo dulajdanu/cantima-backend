@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const Item = require('../model/Item');
-const { itemValidation } = require("../ItemValidation")
+const { itemValidation } = require("../ItemValidation");
+const { route } = require('./auth');
+const { json } = require('body-parser');
 
 //add new item
 router.post('/add', async (req, res) => {
@@ -47,5 +49,33 @@ router.post('/add', async (req, res) => {
 
     }
 });
+
+
+//get 1 item
+router.get('/:itemID', async (req, res) => {
+    try {
+        const item = await Item.findOne({
+            'id': req.params.itemID,
+        });
+        if (item) {
+
+            return res.json({ "item": item }).status(200);
+
+        }
+        else {
+            return res.json({
+                "message": "Item not found"
+            }).status(400);
+        }
+    } catch (error) {
+
+        return res.json({
+            message: error
+        }).status(400);
+
+    }
+});
+
+
 
 module.exports = router;
