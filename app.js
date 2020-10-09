@@ -11,6 +11,10 @@ const authRoute = require('./routes/auth');
 //item route
 const itemRoute = require('./routes/item');
 
+//history route
+const historyRoute = require('./routes/history');
+const moment = require('moment');
+
 
 //connect to DB 
 mongoose.connect(
@@ -31,6 +35,8 @@ app.use('/api/user', authRoute);// every time the user goes to /api/user/ use th
 
 
 app.use('/api/item', itemRoute); //every time the user goes to the api/item use this itemRoute
+
+app.use('/api/history', historyRoute);
 
 
 
