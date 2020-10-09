@@ -13,7 +13,7 @@ router.post('/register', async (req, res) => {
     const error = staffValidation(req.body)
 
     if (error.error != null) {
-        return res.status(400).send(error.error.details[0].message);
+        return res.status(400).json(error.error.details[0].message);
     }
 
 
@@ -45,7 +45,7 @@ router.post('/register', async (req, res) => {
         });
     } catch (error) {
         console.log(error);
-        res.status(400).send(error);
+        res.status(400).json(error);
 
     }
 })
@@ -62,12 +62,12 @@ router.post('/login', async (req, res) => {
     });
 
     if (!staff) {
-        return res.status(400).send("Username doesn't exist ");
+        return res.status(400).json("Username doesn't exist ");
     }
     //now check the password is correct
     const validPass = await bcrypt.compare(req.body.password, staff.password);
 
-    if (!validPass) return res.status(400).send('Invalid password');
+    if (!validPass) return res.status(400).json('Invalid password');
 
 
 
@@ -77,7 +77,7 @@ router.post('/login', async (req, res) => {
 
 
 
-    res.send("You have successfully logged in").status(200);
+    res.json("You have successfully logged in").status(200);
 
 
 
