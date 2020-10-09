@@ -16,6 +16,10 @@ const historyRoute = require('./routes/history');
 const moment = require('moment');
 
 
+//order route
+const orderRoute = require('./routes/order');
+
+
 //connect to DB 
 mongoose.connect(
     'mongodb+srv://admin:admin1996@cluster0.9t4ho.mongodb.net/cantimadb?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true }, () => {
@@ -37,6 +41,8 @@ app.use('/api/user', authRoute);// every time the user goes to /api/user/ use th
 app.use('/api/item', itemRoute); //every time the user goes to the api/item use this itemRoute
 
 app.use('/api/history', historyRoute);
+
+app.use('/api/order', orderRoute);
 
 
 
