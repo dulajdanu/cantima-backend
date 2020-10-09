@@ -15,6 +15,13 @@ const itemRoute = require('./routes/item');
 const historyRoute = require('./routes/history');
 const moment = require('moment');
 
+//staff route
+const staffRoute = require('./routes/staff');
+
+
+
+
+
 
 //order route
 const orderRoute = require('./routes/order');
@@ -43,6 +50,8 @@ app.use('/api/item', itemRoute); //every time the user goes to the api/item use 
 app.use('/api/history', historyRoute);
 
 app.use('/api/order', orderRoute);
+
+app.use('/api/staff', staffRoute);
 
 
 
