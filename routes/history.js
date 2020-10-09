@@ -12,7 +12,7 @@ mongodb.connect(
     function (err, client) {
         db = client.db();
         console.log("connected to db in the history route");
-        console.log(err);
+        // console.log(err);
     }
 )
 
@@ -55,5 +55,70 @@ router.post('/create', function (req, res) {
 
     }
 })
+
+//add a new item to the history doc
+//when the admin select a item from the admin panel and add it this document should update
+router.put('/add-item', function (req, res) {
+    console.log("inside add item");
+    //we have to pass the id of the document which is date
+    let itemIntialCount = `initial_count_${req.body.itemid}`
+    let itemCount = `count_${req.body.itemid}`
+    let rating = `rating_${req.body.itemid}`
+    let ratingCount = `rating_count_${req.body.itemid}`
+
+
+    console.log(itemIntialCount)
+    db.collection("history").findOneAndUpdate(
+        { id: req.body.id },
+        {
+            $set: {
+                [itemIntialCount]: req.body.count,
+                [itemCount]: 0,
+                [rating]: 0,
+                [ratingCount]: 0,
+            }
+
+
+        },
+        function (err, info) {
+            // res.send('Success updated!')
+            console.log(info);
+            return res.send(err);
+
+
+        }
+    )
+})
+
+
+//icrement count of the item again
+router.put('/inc-item', function (req, res) {
+    console.log("inside inc item");
+    //we have to pass the id of the document which is date
+    let itemIntialCount = `initial_count_${req.body.itemid}`
+
+
+    console.log(itemIntialCount)
+    db.collection("history").findOneAndUpdate(
+        { id: req.body.id },
+        {
+            $inc: {
+                [itemIntialCount]: req.body.count,
+            }
+
+
+        },
+        function (err, info) {
+            // res.send('Success updated!')
+            console.log(info);
+            return res.send(err);
+
+
+        }
+    )
+})
+
+
+
 
 module.exports = router;
