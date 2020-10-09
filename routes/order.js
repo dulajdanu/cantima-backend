@@ -51,4 +51,63 @@ router.post('/create', function (req, res) {
     }
 })
 
+
+
+//complete order
+router.put('/complete', function (req, res) {
+    console.log("inside complete order");
+
+
+    try {
+        db.collection("orders").findOneAndUpdate(
+            { _id: new mongodb.ObjectId(req.body._id) }, {
+            $set: {
+                status: "complete",
+                cashier: req.body.cashier,
+                type: req.body.type
+
+            }
+
+
+
+        },
+            function (err, info) {
+                // res.send('Success updated!')
+                console.log(info);
+                // return res.send(err);
+
+
+            }
+        );
+
+        db.collection("history").findOneAndUpdate(
+            { id: req.body.date }, //this should be the date formatted
+            //we have to pass the date
+            {
+                $inc: req.body.doc //This doc should be sent from the front end
+
+
+            },
+            function (err, info) {
+                // res.send('Success updated!')
+                console.log(info);
+                return res.send(err);
+
+
+            }
+        )
+
+    } catch (error) {
+        return res.status(400).json(error);
+
+    }
+
+
+
+
+
+
+
+})
+
 module.exports = router;
