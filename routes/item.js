@@ -35,6 +35,9 @@ router.post('/add', async (req, res) => {
         price: req.body.price,
         category: req.body.category,
         image: req.body.image,
+        time: req.body.time,
+        veg: req.body.veg,
+        des: req.body.des
     })
 
     try {
