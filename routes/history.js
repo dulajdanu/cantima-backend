@@ -32,24 +32,42 @@ mongodb.connect(
 
 //     }
 // });
-router.post('/create', function (req, res) {
+router.post('/create', async (req, res) => {
+    console.log("inside create history doc");
     //creating the history document initially
     //this should run in the admin panel when the day started
     let docId = moment().format('YYYY.MM.DD');
 
     try {
-        db.collection('history').insertOne({ id: docId }, function (
-            err,
-            info
-        ) {
-            if (err == null) {
-                return res.json(info.ops[0]).status(200);
+
+
+        //check whether there is already a document
+        await db.collection('history').findOne({ id: "2020.10.10" }, function (err, info) {
+            // console.log(info);
+            // return res.json(info);
+
+            if (info == null) {
+                db.collection('history').insertOne({ id: docId }, function (
+                    err,
+                    info
+                ) {
+                    if (err == null) {
+                        return res.json(info.ops[0]).status(200);
+                    }
+                    else {
+
+                        return res.json({ message: err }).status(400);
+                    }
+                })
             }
             else {
-
-                return res.json({ message: err }).status(400);
+                return res.json({ "message": "document already exists" }).status(400);
             }
-        })
+        });
+
+
+
+
     } catch (error) {
         return res.json({ "message": error }).status(400);
 
