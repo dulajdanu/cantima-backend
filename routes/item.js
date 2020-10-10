@@ -59,19 +59,19 @@ router.get('/:itemID', async (req, res) => {
         });
         if (item) {
 
-            return res.json({ "item": item }).status(200);
+            return res.status(200).json({ "item": item });
 
         }
         else {
-            return res.json({
+            return res.status(400).json({
                 "message": "Item not found"
-            }).status(400);
+            });
         }
     } catch (error) {
 
-        return res.json({
+        return res.status(400).json({
             message: error
-        }).status(400);
+        });
 
     }
 });
@@ -86,19 +86,19 @@ router.delete('/:itemID', async (req, res) => {
         console.log(removedItem);
         if (removedItem.deletedCount != 0) {
 
-            return res.json({ "message": "Item removed" }).status(200);
+            return res.status(200).json({ "message": "Item removed" });
 
         }
         else {
-            return res.json({
+            return res.status(400).json({
                 "message": "Item not found"
-            }).status(400);
+            });
         }
     } catch (error) {
 
-        return res.json({
+        return res.status(400).json({
             "message": error
-        }).status(400);
+        });
 
     }
 });
@@ -144,11 +144,11 @@ router.patch('/:itemID', async (req, res) => {
         });
 
         if (updatedItem["nModified"] != 0) {
-            return res.json({ "message": "Item updated successfully" }).status(200);
+            return res.status(200).json({ "message": "Item updated successfully" });
 
 
         } else {
-            return res.json({ "message": "Item not found " }).status(200);
+            return res.status(400).json({ "message": "Item not found " });
 
 
 
@@ -157,9 +157,9 @@ router.patch('/:itemID', async (req, res) => {
 
     } catch (error) {
 
-        return res.json({
+        return res.status(400).json({
             "message": error
-        }).status(400);
+        });
 
     }
 });

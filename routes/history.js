@@ -42,7 +42,7 @@ router.post('/create', async (req, res) => {
 
 
         //check whether there is already a document
-        await db.collection('history').findOne({ id: docId }, function (err, info) {
+        db.collection('history').findOne({ id: docId }, function (err, info) {
             // console.log(info);
             // return res.json(info);
 
@@ -52,16 +52,17 @@ router.post('/create', async (req, res) => {
                     info
                 ) {
                     if (err == null) {
-                        return res.json(info.ops[0]).status(200);
+                        console.log("here");
+                        return res.status(200).json(info.ops[0]);
                     }
                     else {
 
-                        return res.json({ message: err }).status(400);
+                        return res.status(400).json({ message: err });
                     }
                 })
             }
             else {
-                return res.json({ "message": "document already exists" }).statusCode(400);
+                return res.status(400).json({ "message": "document already exists" });
             }
         });
 
@@ -69,7 +70,7 @@ router.post('/create', async (req, res) => {
 
 
     } catch (error) {
-        return res.json({ "message": error }).status(400);
+        return res.status(400).json({ "message": error });
 
     }
 })

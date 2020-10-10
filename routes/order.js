@@ -37,16 +37,16 @@ router.post('/create', function (req, res) {
             info
         ) {
             if (err == null) {
-                return res.json(info.ops[0]).status(200);
+                return res.status(200).json(info.ops[0]);
             }
             else {
 
-                return res.json({ message: err }).status(400);
+                return res.status(400).json({ message: err });
             }
         })
 
     } catch (error) {
-        return res.json({ "message": error }).status(400);
+        return res.status(400).json({ "message": error });
 
     }
 })
