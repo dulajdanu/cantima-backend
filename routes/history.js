@@ -42,7 +42,7 @@ router.post('/create', async (req, res) => {
 
 
         //check whether there is already a document
-        await db.collection('history').findOne({ id: "2020.10.10" }, function (err, info) {
+        await db.collection('history').findOne({ id: docId }, function (err, info) {
             // console.log(info);
             // return res.json(info);
 
@@ -61,7 +61,7 @@ router.post('/create', async (req, res) => {
                 })
             }
             else {
-                return res.json({ "message": "document already exists" }).status(400);
+                return res.json({ "message": "document already exists" }).statusCode(400);
             }
         });
 
