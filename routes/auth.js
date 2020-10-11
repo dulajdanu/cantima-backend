@@ -13,7 +13,7 @@ router.post('/register', async (req, res) => {
     const error = registerValidation(req.body)
 
     if (error.error != null) {
-        return res.status(400).send(error.error.details[0].message);
+        return res.status(400).json({ "message": error.error.details[0].message });
     }
 
 
