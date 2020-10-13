@@ -163,6 +163,7 @@ router.get('/today', function (req, res) {
     //we have to pass the id of the document which is date
 
     let docId = moment().format('YYYY.MM.DD');
+    console.log(moment().format('MMMM Do YYYY, h:mm:ss a'));
 
 
 
