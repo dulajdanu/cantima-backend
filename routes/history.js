@@ -156,6 +156,51 @@ router.put('/inc-item', function (req, res) {
     )
 })
 
+//get today history documment
+
+router.get('/today', function (req, res) {
+    console.log("inside today function. this will return the today document");
+    //we have to pass the id of the document which is date
+
+    let docId = moment().format('YYYY.MM.DD');
+
+
+
+    db.collection("history").findOne(
+        { id: docId },
+
+        function (err, info) {
+            // res.send('Success updated!')
+            // console.log(info['lastErrorObject']['updatedExisting']);
+            // // return res.send(err);
+
+            // if (info['lastErrorObject']['updatedExisting'] == true) {
+
+            //     return res.status(200).json({ 'message': "item count incremented in showcase" });
+
+            // } else {
+            //     return res.status(400).json({ 'message': "error occured" });
+
+
+            // }
+            console.log(info);
+            if (info != null) {
+
+                return res.status(200).json({
+                    'message': info
+                });
+
+            } else {
+
+                return res.status(400).json({
+                    'message': err
+                });
+
+            }
+
+        }
+    )
+})
 
 
 
