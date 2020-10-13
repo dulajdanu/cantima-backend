@@ -141,7 +141,10 @@ router.patch('/:itemID', async (req, res) => {
                 name: req.body.name,
                 price: req.body.price,
                 category: req.body.category,
-                image: req.body.image,
+                // image: req.body.image,
+                time: req.body.time,
+                veg: req.body.veg,
+                des: req.body.des
 
             }
         });
@@ -163,6 +166,25 @@ router.patch('/:itemID', async (req, res) => {
         return res.status(400).json({
             "message": error
         });
+
+    }
+});
+
+
+//get all items from a category
+router.get('/cat/:catID', async (req, res) => {
+    console.log("get all items of the given category");
+    try {
+        const allItems = await Item.find(
+            { 'category': req.params.catID }
+        );
+
+        return res.status(200).json({ "items": allItems });
+
+
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ "message": error });
 
     }
 });
