@@ -101,8 +101,18 @@ router.put('/add-item', function (req, res) {
         },
         function (err, info) {
             // res.send('Success updated!')
-            console.log(info);
-            return res.send(err);
+            console.log(info['lastErrorObject']['updatedExisting']);
+            // return res.send(err);
+
+            if (info['lastErrorObject']['updatedExisting'] == true) {
+
+                return res.status(200).json({ 'message': "item added to showcase" });
+
+            } else {
+                return res.status(400).json({ 'message': "error occured" });
+
+
+            }
 
 
         }
@@ -129,9 +139,18 @@ router.put('/inc-item', function (req, res) {
         },
         function (err, info) {
             // res.send('Success updated!')
-            console.log(info);
-            return res.send(err);
+            console.log(info['lastErrorObject']['updatedExisting']);
+            // return res.send(err);
 
+            if (info['lastErrorObject']['updatedExisting'] == true) {
+
+                return res.status(200).json({ 'message': "item count incremented in showcase" });
+
+            } else {
+                return res.status(400).json({ 'message': "error occured" });
+
+
+            }
 
         }
     )
