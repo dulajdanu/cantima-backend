@@ -110,4 +110,56 @@ router.put('/complete', function (req, res) {
 
 })
 
+
+//get past orders of a user
+
+
+router.get('/getallorders/:userID', async (req, res) => {
+    console.log("get all orders of a given user");
+    console.log(req.params.userID);
+    try {
+
+        db.collection("orders").find({ "customerID": req.params.userID }).toArray(function (err, result) {
+            // if (err) throw err;
+            console.log(result);
+
+            if (err) {
+                return res.status(400).json({ "message": "Error occured" });
+
+            } else {
+
+                return res.status(200).json(result);
+
+            }
+            // db.close();
+        });
+        // let orders = await db.collection("orders").find(
+        //     { "customerID": req.params.userID },
+        //     // function (err, info) {
+        //     //     // res.send('Success updated!')
+        //     //     // console.log(orders);
+        //     //     return res.json({ "message": "hi" });
+
+
+        //     // }
+        // );
+
+        // console.log(orders.data);
+
+        // if (orders) {
+        //     return res.status(200).json({ 'orders': orders });
+
+        // }
+        // else {
+        //     return res.status(400).json({ 'message': "error" });
+        // }
+
+
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ "message": error });
+
+    }
+});
+
 module.exports = router;
