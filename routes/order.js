@@ -162,4 +162,69 @@ router.get('/getallorders/:userID', async (req, res) => {
     }
 });
 
+
+//add canteen credits
+
+router.post('/add-credits', async (req, res) => {
+    console.log("add new credits")
+    //creating the history document initially
+    //this should run in the admin panel when the day started
+
+    try {
+        await db.collection("credits").findOneAndUpdate(
+            { userID: req.body.id }, //this should be the user id
+            //we have to pass the date
+            {
+                $inc: req.body.amount //This should be the amout he gave
+
+
+            },
+            function (err, info) {
+                // res.send('Success updated!')
+                console.log(info);
+                // console.log(err);
+                // return res.send(err);
+
+                if (info != null) {
+                    if (info['lastErrorObject']['updatedExisting'] == true) {
+
+                        res.status(200).json({ "message": "Credits added successfuly" });
+
+                    } else {
+
+                        // res.send();
+                        console.log("user document doesnt exist");
+                        // db.collection("credits")
+                        // res.status(400).json({ "message": "user account doesnt exist" });
+                        var myobj = { userID: req.body.id, amount: req.body.amount['amount'] };
+
+                        db.collection("credits").insertOne(myobj, function (err, re) {
+                            if (err) throw err;
+                            console.log("1 document inserted");
+                            // db.close();
+
+                            res.status(200).json({ "message": "credits added" });
+
+                        });
+
+
+                    }
+
+                } else {
+
+                    res.status(400).json({ "message": "error occured" });
+
+                }
+
+
+            }
+        )
+
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json({ "message": error });
+
+    }
+})
+
 module.exports = router;
