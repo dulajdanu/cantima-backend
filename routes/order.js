@@ -227,4 +227,35 @@ router.post('/add-credits', async (req, res) => {
     }
 })
 
+
+//get order by order id
+router.get('/:orderID', async (req, res) => {
+    console.log("get the order details");
+    console.log(req.params.orderID);
+    try {
+
+        // db.collection("orders").findOne({ _id: new mongodb.ObjectId(req.params.orderID) }).toArray(function (err, result) {}
+
+        await db.collection("orders").findOne({ _id: new mongodb.ObjectId(req.params.orderID) }, function (err, result) {
+            // if (err) throw err;
+            // console.log(result.name);
+            console.log(result);
+
+            if (result == null) {
+                res.status(400).json({ "message": "Order not found" })
+
+            } else {
+
+                res.status(200).json({ "order": result });
+            }
+        });
+
+
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({ "message": error });
+
+    }
+});
+
 module.exports = router;
